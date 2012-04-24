@@ -256,6 +256,23 @@ class NID(models.Model):
             return None
         
         return vrs.object
+    
+    @property
+    def reftype(self):
+        """ 
+        Returns the type the id belongs to.
+        """
+        try:
+            """ 
+            ALGO: simple wrapper for the __class__.__name__ so that it can be used in templates  
+            """
+            obj = self.ref
+            return obj.__class__.__name__
+        
+        except:
+            return None
+        
+
 
     @property
     def get_edit_url(self):
@@ -2083,5 +2100,10 @@ post_save.connect(ping_directories_handler, sender=Nodetype,
 post_save.connect(ping_external_urls_handler, sender=Nodetype,
                   dispatch_uid='gstudio.nodetype.post_save.ping_external_urls')
 
+class Peer(User):
+    """Subclass for non-human users"""
+    def __unicode__(self):
+        return self.ip
 
-
+    ip = models.IPAddressField("Peer's IP address")
+    pkey = models.CharField(("Peer's public-key"), max_length=255)
