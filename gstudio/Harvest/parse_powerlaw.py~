@@ -1,0 +1,42 @@
+import os
+import xmlrpclib
+
+file = open('/home/met2012/Desktop/newdev/gnowsys-studio/gstudio/Harvest/Packages')
+
+no_of_packages = 0
+package_dependency_dict = {}
+nidlist = []
+for line in file.readlines():
+    value = ''
+    array = line.split(':')
+    if array[0] == 'Package':
+        packagename = array[1]
+        packagename = packagename.replace('\n','')
+        packagename = packagename.replace(' ','')
+        if packagename not in package_dependency_dict:
+            package_dependency_dict[packagename] = []
+
+    if array[0] == 'Priority':
+	packageprty=array[1]
+	packageprty=packageprty.replace('\n','')
+	packageprty=packageprty.replace(' ','')
+	if packagename not in package_dependency_dict:
+            package_dependency_dict[packageprty] = []
+
+    # if array[0] == 'Depends':
+    #     len_depends = len('Depends') + 1
+    #     value = line[len_depends:]
+    #     valuelst = value.split(',')
+    #     dependency_list = []
+    #     for elem in valuelst:
+    #         val1 = elem.replace(' ','')
+    #         val2 = val1.replace('\n','')
+    #         dependency_list.append(val2)
+
+    #     package_dependency_dict[packagename] = dependency_list
+        
+print package_dependency_dict            
+
+
+
+    

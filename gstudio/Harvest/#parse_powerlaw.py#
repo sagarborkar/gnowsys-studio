@@ -1,0 +1,79 @@
+import os
+import xmlrpclib
+
+file = open('/home/met2012/Desktop/newdev/gnowsys-studio/gstudio/Harvest/Packages')
+
+no_of_packages = 0
+package_dependency_dict = {}
+package_prio=[]
+package_arch=[]
+package_tag=[]
+package_des=[]
+nidlist = []
+for line in file.readlines():
+    value = ''
+    array = line.split(':')
+    print array[0]
+
+    if array[0] == 'Package':
+        packagename = array[1]
+        packagename = packagename.replace('\n','')
+        packagename = packagename.replace(' ','')
+        if packagename not in package_dependency_dict:
+            package_dependency_dict[packagename] = []
+
+    if array[0] == 'Priority':
+	packageprty=array[1]
+	packageprty=packageprty.replace('\n','')
+	packageprty=packageprty.replace(' ','')
+        package_prio.append(packageprty)
+	# if packagename not in package_dependency_dict:
+        #     package_dependency_dict[packageprty] = []
+    
+    if array[0] == 'Architecture':
+	packagearch=array[1]
+	packagearch=packagearch.replace('\n','')
+	packagearch=packagearch.replace(' ','')
+        package_arch.append(packagearch)
+
+    if array[0] == 'Tag':
+	packagetag=array[1]
+	packagetag=packagetag.replace('\n','')
+	packagetag=packagetag.replace(' ','')
+        package_tag.append(packagetag)
+
+    #if array[0] == 'Description':
+        #print array[0][1]
+    #     len_desc=len('Description') + 1
+    #     value=line[len_desc:]
+    #     vallst=value.split('\n')
+    #     desc_list=[]
+    #     for elem in vallst:            
+    #         desc_list.append(elem)
+    #     # packagedes=packagedes.replace('\n','')
+    #     # packagedes=packagedes.replace(' ','')
+    #     # package_des.append(packagedes)
+
+    # if array[0] == 'Depends':
+    #     len_depends = len('Depends') + 1
+    #     value = line[len_depends:]
+    #     valuelst = value.split(',')
+    #     dependency_list = []
+        # for elem in valuelst:
+        #     val1 = elem.replace(' ','')
+        #     val2 = val1.replace('\n','')
+        #     dependency_list.append(val2)
+
+    #     package_dependency_dict[packagename] = dependency_list
+
+#print package_prio  
+#print package_arch
+#print package_tag 
+#print package_des   
+#print desc_list   
+#print package_dependency_dict 
+           
+
+
+
+    
